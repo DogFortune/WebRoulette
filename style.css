@@ -1,0 +1,247 @@
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&BIZ+UDPGothic&family=Noto+Sans+JP:wght@100..900&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --bg: #0d0d0f;
+    --surface: #18181c;
+    --border: #2a2a32;
+    --accent: #e8c97a;
+    --accent2: #c44f3a;
+    --text: #f0ede6;
+    --muted: #6b6b78;
+    --radius: 14px;
+}
+
+body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'BIZ UDPGothic', sans-serif;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 3rem;
+    gap: 2rem;
+}
+
+h1 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(2.5rem, 8vw, 4.5rem);
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    user-select: none;
+}
+
+.field {
+    display: flex;
+}
+
+.wheel-wrap {
+    position: relative;
+    width: min(500px, 100vw);
+    aspect-ratio: 1;
+}
+
+.pointer {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 14px solid transparent;
+    border-right: 14px solid transparent;
+    border-top: 28px solid var(--accent);
+    filter: drop-shadow(0 0 6px rgba(232, 201, 122, 0.6));
+    z-index: 10;
+}
+
+canvas#wheel {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+}
+
+.controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+    width: min(500px, 92vw);
+}
+
+.entries-label {
+    align-self: flex-start;
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-transform: uppercase;
+}
+
+.entry-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+.entry-list::-webkit-scrollbar {
+    width: 4px;
+}
+
+.entry-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.entry-list::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 2px;
+}
+
+.entry-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.entry-input {
+    flex: 1;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.45rem 0.75rem;
+    outline: none;
+    transition: border-color 0.15s;
+}
+
+.entry-input:focus {
+    border-color: var(--accent);
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: var(--muted);
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 1;
+    padding: 2px 6px;
+    border-radius: 6px;
+    transition: color 0.15s;
+}
+
+.btn-remove:hover {
+    color: var(--accent2);
+    background: rgba(196, 79, 58, 0.1);
+}
+
+.row-actions {
+    display: flex;
+    gap: 0.75rem;
+    align-self: flex-start;
+}
+
+.btn {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.45rem 1rem;
+    transition: border-color 0.15s, color 0.15s;
+}
+
+.btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.btn-spin {
+    width: 100%;
+    background: var(--accent);
+    border: none;
+    border-radius: 12px;
+    color: #0d0d0f;
+    font-family: 'BIZ UDPGothic', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.15em;
+    cursor: pointer;
+    padding: 0.7rem 2rem;
+    transition: opacity 0.15s, transform 0.1s;
+    box-shadow: 0 4px 24px rgba(232, 201, 122, 0.25);
+}
+
+.btn-spin:hover {
+    opacity: 0.88;
+}
+
+.btn-spin:active {
+    transform: scale(0.98);
+}
+
+.btn-spin:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.result-box {
+    width: 100%;
+    min-height: 62px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1.25rem;
+    transition: border-color 0.3s;
+}
+
+.result-box.lit {
+    border-color: var(--accent);
+}
+
+.result-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    display: none;
+}
+
+.result-text {
+    font-family: 'BIZ UDPGothic', sans-serif;
+    font-size: 1.7rem;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    opacity: 0;
+    transition: opacity 0.4s;
+}
+
+.result-text.show {
+    opacity: 1;
+}

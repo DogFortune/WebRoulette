@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebRoulette</title>
+    <link rel="stylesheet" href="style.css" type="text/css">
+</head>
+
+<body>
+
+    <h1>WebRoulette</h1>
+    <div class="field">
+
+        <div class="wheel-wrap">
+            <div class="pointer"></div>
+            <canvas id="wheel"></canvas>
+        </div>
+
+        <div class="controls">
+            <span class="entries-label">項目</span>
+            <div class="entry-list" id="entryList"></div>
+
+            <div class="row-actions">
+                <button class="btn" id="btnAdd">＋ 追加</button>
+                <button class="btn" id="btnShuffle">シャッフル</button>
+            </div>
+
+            <div class="result-box" id="resultBox">
+                <div class="result-dot" id="resultDot"></div>
+                <span class="result-text" id="resultText">—</span>
+            </div>
+
+            <button class="btn-spin" id="btnSpin">スタート</button>
+        </div>
+    </div>
+
+    <script src="index.js"></script>
+</body>
+<footer>
+    <p>&copy; 2026 DogFortune</p>
+    <p>SourceCode: <a href="https://github.com/DogFortune/WebRoulette">GitHub</a></p>
+</footer>
+
+</html>
