@@ -20,9 +20,14 @@ const resultBox = document.getElementById('resultBox');
 const resultText = document.getElementById('resultText');
 const resultDot = document.getElementById('resultDot');
 
+/**
+ * 乱数を作ります。
+ * @returns 0.0以上、1.0未満の乱数1つ
+ */
 function cryptoRandom() {
     const arr = new Uint32Array(2);
     crypto.getRandomValues(arr);
+    // 結合して64bit整数にしてから割る事でより精度の高い乱数を作る。
     return (arr[0] * 2 ** 32 + arr[1]) / (2 ** 64);
 }
 
